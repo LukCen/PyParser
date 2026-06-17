@@ -1,0 +1,24 @@
+{% extends "layout.html"%}
+{% block table %}
+<h1>Welcome to PyParser</h1>
+<p>PyParser is a tool for parsing, editing and exporting CSV files using a nice and easy GUI.</p>
+<input type="file" name="user_file" id="user_file">
+<table>
+  <thead>
+    <tr>
+      {% for col in columns %}
+      <th>{{ col }}</th>
+      {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for row in rows %}
+    <tr>
+      {% for cell in row %}
+      <td>{{ cell }}</td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

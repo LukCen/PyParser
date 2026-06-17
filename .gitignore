@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyc
+
+# Virtual environment
+venv/
+.venv/
+
+# Flask/environment
+.env
+instance/
+
+# Uploads (user files, don't want those in repo)
+uploads/
+
+# OS stuff
+.DS_Store
+Thumbs.db
