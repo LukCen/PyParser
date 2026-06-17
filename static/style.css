@@ -47,8 +47,10 @@ table {
 	border-spacing: 0;
 }
 
-* {
+html, html * {
 	font-family: Noto Sans, sans-serif !important;
+	--color-dark-grey: #222222;
+	--color-dark-yellow: #fffb00;
 }
 
 body {
@@ -56,9 +58,11 @@ body {
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
-
+	background: var(--color-dark-grey);
 	max-width: 960px;
 	margin: 0 auto;
+	color: var(--color-dark-yellow);
+	gap: 1rem;
 }
 
 th,td {
@@ -66,9 +70,23 @@ th,td {
 }
 
 th {
-	border: 3px solid black;
+	border: 3px solid var(--color-dark-yellow);
 }
 
 td {
-	border: 1px solid black;
+	border: 1px solid var(--color-dark-yellow);
+}
+
+nav {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.btn {
+	display: block;
+	width: fit-content;
+	padding: .5rem 1rem;
+	background: var(--color-dark-yellow);
+	color: var(--color-dark-grey);
 }
