@@ -17,3 +17,6 @@ uploads/
 # OS stuff
 .DS_Store
 Thumbs.db
+
+# personal thoughts and app planning
+THOUGHTS.md

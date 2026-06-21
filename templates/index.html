@@ -2,18 +2,22 @@
 {% block table %}
 
 <h1>Welcome to PyParser</h1>
-<p>PyParser is a tool for parsing, editing and exporting CSV files using a nice and easy GUI.</p>
-<form enctype="multipart/form-data" method="post">
+<p>PyParser is a tool for parsing, editing and exporting CSV files using a nice and easy GUI. Currently it just displays it, but stay tuned for more features.</p>
+<form class="file-upload" enctype="multipart/form-data" method="post">
   <input type="file" name="user_file" id="user_file">
-  <button type="btn submit">Upload</button>
+  <button disabled class="btn upload" type="submit">Upload</button>
 </form>
-{% if columns and rows%}
-<form action="" method="get">
-  <select name="filter_column">
-    {% for col in columns %}
-    <option value="{{ col }}">{{ col }}</option>
-    {% endfor %}
-  </select>
+<!-- check if columns and rows were passes as a parameter, does not render otherwise as that means no data was given -->
+{% if columns and rows %}
+<form action="/filter-column" class="filters" method="post" name="filter_column">
+  <div class="form-block">
+    <select name="filter_column">
+      {% for col in columns %}
+      <option value="{{ col }}">{{ col }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button type="submit">Filter</button>
 </form>
 <table>
   <thead>
@@ -27,15 +31,43 @@
     {% for row in rows %}
     <tr>
       {% for cell in row %}
-      <td>{{ cell }}</td>
+      <td class="{{col}}-{{row}}">{{ cell }}</td>
       {% endfor %}
     </tr>
     {% endfor %}
   </tbody>
 </table>
+<!-- FOR TESTING - DELETE LATER -->
+{% if for_filters%}
+<div style="display:none">
+  {{for_filters}}
+</div>
+
 {%endif%}
-<nav>
+{%endif%}
+<!-- <nav>
   <a class="btn nav-btn prev" href="/?page={{ current_page - 1 }}">Previous</a>
   <a class="btn nav-btn next" href="/?page={{ current_page + 1 }}">Next</a>
-</nav>
+</nav> -->
+<!-- needs to be in a block so it only runs after file is passed, else it errors out -->
+{% if for_filters %}
+<script>
+  // Force Flask to output it as a valid JS object
+  // if your IDE shows errors here, its just due to syntax technically not being valid JS (double brackets dont make sense) but it works
+  const jsonifiedData = {{ for_filters | tojson | safe }}
+  console.log("Direct template log:", jsonifiedData);
+</script>
+{% endif %}
+<!-- prevents Jinja crashing if a user tries uploading a file without adding it to input furst -->
+<script defer>
+  const upload = document.querySelector(".btn.upload")
+
+  const file = document.querySelector("input[type=file]")
+
+  file.addEventListener("change", () => {
+    if (file.files.length > 0) {
+      upload.disabled = false
+    }
+  })
+</script>
 {% endblock %}

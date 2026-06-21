@@ -16,8 +16,18 @@ def landing():
   
   if new_file is not None:
     parsed = FileParser(new_file).read_csv()
+    # clean up header columns and capitalize them
+    formatted_columns = [a.capitalize().replace("_"," ") for a in parsed.columns]
+    dataset_for_filters = parsed.to_dict(orient="records")
     return render_template("index.html", 
-                          columns=parsed.columns.tolist(), 
-                          rows=parsed.values.tolist()[start:end], 
-                          current_page=page)
+                          columns=formatted_columns, 
+                          rows=parsed.to_numpy().tolist(), 
+                          current_page=page,
+                          for_filters=dataset_for_filters)
   else: return render_template("index.html", columns=None, rows=None, current_page=page)
+
+
+@app.route("/filter-column", methods=["GET","POST"])
+def filtered():
+  return f"<span>{ request.form.get('filter_column')}</span>"
+ 

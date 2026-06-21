@@ -65,12 +65,22 @@ body {
 	gap: 1rem;
 }
 
+form.file-upload {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 1rem;
+}
 th,td {
 	padding: 5px;
 }
 
 th {
-	border: 3px solid var(--color-dark-yellow);
+	background: var(--color-dark-yellow);
+	color: var(--color-dark-grey);
+	border: 1px solid var(--color-dark-yellow);
+	font-weight: 700;
 }
 
 td {
@@ -89,4 +99,14 @@ nav {
 	padding: .5rem 1rem;
 	background: var(--color-dark-yellow);
 	color: var(--color-dark-grey);
+}
+
+.filters {
+	display: flex;
+	justify-content: space-between;
+}
+
+.filters .form-block {
+	display: flex;
+	flex-direction: column;
 }
