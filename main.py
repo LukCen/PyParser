@@ -1,11 +1,21 @@
 from flask import Flask, render_template, request
 from utils.file_parser import FileParser
+import json
 app = Flask(__name__)
+
+with open('paths.json', "r") as f:
+  paths = json.load(f)
+
+# global variable injection
+@app.context_processor
+def global_navbar():
+  return dict(navbar=paths)
 
 def filtered_data(data_from_file, type, index):
   if type=="column":
     return data_from_file[index]
 
+# landing page
 @app.route("/", methods=["GET","POST"])
 def landing():
   new_file = request.files.get('user_file')
@@ -31,3 +41,6 @@ def landing():
 def filtered():
   return f"<span>{ request.form.get('filter_column')}</span>"
  
+@app.route("/register", methods=["GET","POST"])
+def register():
+  return render_template("register.html")

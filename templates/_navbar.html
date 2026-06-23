@@ -1,0 +1,10 @@
+{% block main_navbar %}
+<nav class="main-nav">
+  <ul>
+    {% for item, path in navbar.items() %}
+    <li class="btn"><a href="{{path}}">{{item | capitalize}}</a></li>
+    {% endfor %}
+  </ul>
+  <a href="/register" class="btn">Register</a>
+</nav>
+{% endblock%}

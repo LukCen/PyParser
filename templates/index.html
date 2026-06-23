@@ -1,6 +1,6 @@
 {% extends "layout.html"%}
+{% include "_navbar.html"%}
 {% block table %}
-
 <h1>Welcome to PyParser</h1>
 <p>PyParser is a tool for parsing, editing and exporting CSV files using a nice and easy GUI. Currently it just displays it, but stay tuned for more features.</p>
 <form class="file-upload" enctype="multipart/form-data" method="post">
@@ -22,6 +22,7 @@
 <table>
   <thead>
     <tr>
+      <th class="table-id-column">ID</th>
       {% for col in columns %}
       <th>{{ col }}</th>
       {% endfor %}
@@ -30,6 +31,7 @@
   <tbody>
     {% for row in rows %}
     <tr>
+      <td class="table-id-column">{{loop.index0}}</td>
       {% for cell in row %}
       <td>{{ cell }}</td>
       {% endfor %}

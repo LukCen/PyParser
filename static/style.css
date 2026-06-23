@@ -76,7 +76,7 @@ th,td {
 	padding: 5px;
 }
 
-th {
+th, .table-id-column {
 	background: var(--color-dark-yellow);
 	color: var(--color-dark-grey);
 	border: 1px solid var(--color-dark-yellow);
