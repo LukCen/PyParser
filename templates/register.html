@@ -2,19 +2,25 @@
 
 {% block register %}
 
-<form class="register_form">
+<form class="register_form" method="post">
   <div class="text">
     <h1>Register a new account to access full functionality - uploading, opening, editing, deleting and downloading your files</h1>
   </div>
   <div class="input-row">
-    <label for="register_username">username</label><input name="register_username" type="text">
+    <label for="register_username">username</label>
+    <input name="register_username" type="text">
   </div>
   <div class="input-row">
-    <label for="register_password">password</label><input name="register_password" type="password">
+    <label for="register_password">password</label>
+    <input name="register_password" type="password">
   </div>
   <div class="input-row">
-    <label for="register_email">email</label><input name="register_email" type="email">
+    <label for="register_email">email</label>
+    <input name="register_email" type="email">
   </div>
   <button class="btn" type="submit">Create new account</button>
 </form>
+<!-- {%if temp_data%}
+<span>{{temp_data}}</span>
+{%endif%} -->
 {% endblock %}

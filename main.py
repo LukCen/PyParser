@@ -1,7 +1,12 @@
 from flask import Flask, render_template, request
 from utils.file_parser import FileParser
+from utils.database_handler import DatabaseHandler
+from api.register_user import register_user
 import json
+
 app = Flask(__name__)
+
+pyparse_users = DatabaseHandler()
 
 with open('paths.json', "r") as f:
   paths = json.load(f)
@@ -43,4 +48,15 @@ def filtered():
  
 @app.route("/register", methods=["GET","POST"])
 def register():
+  if request.method == "POST":
+    payload = register_user()
+    print(payload)
+    pyparse_users.insert_data('registered_users',{"username": payload["username"], "password_hash":payload["password_hash"], "email":payload["email"],"blob_folder":f"/{payload["username"]}"})
+    return render_template("register.html", temp_data = payload)
   return render_template("register.html")
+
+@app.route("/db-test", methods=["GET","POST"])
+def db_post():
+
+  d = pyparse_users.get_data('registered_users', '*')
+  return f"<span>{d}</span>"
